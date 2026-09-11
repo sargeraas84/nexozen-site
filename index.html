@@ -15,6 +15,19 @@
     .hero{min-height:650px;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:65px 0 90px;position:relative}.eyebrow{color:var(--cyan);font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:11px}.hero h1{font-size:clamp(46px,7vw,84px);line-height:.98;letter-spacing:-.065em;margin:18px 0 24px;max-width:760px}.gradient{background:linear-gradient(110deg,#fff 10%,#b6f7ff 45%,#a776ff 78%,#ff6cc9);-webkit-background-clip:text;background-clip:text;color:transparent}.lead{font-size:19px;color:var(--muted);max-width:570px}.actions{display:flex;gap:12px;margin:32px 0;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:12px;border:1px solid var(--line);font-weight:700;background:rgba(255,255,255,.045)}.btn.primary{border:0;color:#06111b;background:linear-gradient(100deg,var(--cyan),#72caff 45%,#d374ff);box-shadow:0 0 28px rgba(39,227,255,.22)}.meta{display:flex;gap:20px;color:var(--muted);font-size:12px}.meta b{color:var(--text)}
     .orbital{aspect-ratio:1;max-width:480px;margin:auto;position:relative;display:grid;place-items:center}.orbital:before,.orbital:after{content:"";position:absolute;border:1px solid rgba(39,227,255,.22);border-radius:50%;transform:rotate(-24deg);box-shadow:0 0 40px rgba(39,227,255,.09)}.orbital:before{inset:10%;}.orbital:after{inset:0;transform:rotate(56deg) scaleY(.45)}.core{width:52%;aspect-ratio:1;border-radius:35%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.3),transparent 12%),linear-gradient(145deg,rgba(39,227,255,.3),rgba(157,102,255,.3) 55%,rgba(255,79,195,.25));border:1px solid rgba(255,255,255,.32);box-shadow:0 0 80px rgba(39,227,255,.25),inset 0 0 50px rgba(157,102,255,.2);animation:float 6s ease-in-out infinite}.core img{width:62%;filter:drop-shadow(0 0 24px rgba(39,227,255,.8))}.orbit{position:absolute;border:1px solid rgba(255,255,255,.13);border-radius:50%;inset:14%;animation:spin 18s linear infinite}.orbit i{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 14px var(--cyan);top:7%;left:47%}.orbit.two{inset:3%;transform:rotate(60deg);animation-duration:27s}.orbit.two i{background:var(--pink);box-shadow:0 0 14px var(--pink);top:52%;left:1%}
     section{padding:86px 0}.sectionhead{max-width:630px;margin-bottom:30px}.sectionhead h2{font-size:38px;letter-spacing:-.04em;margin:10px 0}.sectionhead p{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:linear-gradient(145deg,rgba(22,31,49,.8),rgba(10,15,27,.72));border:1px solid var(--line);border-radius:18px;padding:24px;min-height:195px}.icon{font-size:24px}.card h3{margin:13px 0 6px}.card p{color:var(--muted);margin:0;font-size:14px}.showcase{display:grid;grid-template-columns:1fr 1fr;gap:18px}.shot{min-height:255px;border:1px solid var(--line);border-radius:18px;overflow:hidden;position:relative;background:linear-gradient(135deg,#10192a,#121023 45%,#081d29)}.shot:after{content:"";position:absolute;inset:25% -20% -50%;background:radial-gradient(ellipse,rgba(39,227,255,.35),transparent 58%);filter:blur(20px)}.shot .label{position:absolute;left:20px;bottom:18px;z-index:1;font-weight:700}.cta{border:1px solid var(--line);border-radius:24px;padding:44px;background:linear-gradient(110deg,rgba(39,227,255,.1),rgba(157,102,255,.1),rgba(255,79,195,.08));display:flex;align-items:center;justify-content:space-between;gap:25px}.cta h2{margin:0;font-size:30px}.cta p{color:var(--muted);margin:7px 0 0}.footer{border-top:1px solid var(--line);padding:25px 0 38px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between}
+    .dl-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .dl-card{background:linear-gradient(145deg,rgba(22,31,49,.82),rgba(10,15,27,.72));border:1px solid var(--line);border-radius:18px;padding:22px;display:grid;gap:12px;align-content:start}
+    .dl-os{font-weight:800;letter-spacing:.04em;font-size:14px}
+    .dl-links{display:flex;flex-direction:column;gap:9px}
+    .dl-item{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:11px;padding:11px 14px;background:rgba(255,255,255,.03);transition:border-color .2s ease,transform .2s ease}
+    .dl-item:hover{border-color:rgba(39,227,255,.45);transform:translateY(-1px)}
+    .dl-item b{font-size:13px}
+    .dl-item span{color:var(--muted);font-size:11px}
+    .dl-size{color:var(--cyan);font-size:11px;font-weight:700;white-space:nowrap}
+    .dl-pending{color:var(--muted);font-size:12px}
+    .dl-version{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(39,227,255,.35);color:var(--cyan);border-radius:999px;padding:5px 12px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+    .dl-foot{margin-top:16px;color:var(--muted);font-size:12px}
+    .dl-all{display:inline-block;margin-top:12px;color:var(--text);font-size:12px;border-bottom:1px solid var(--line)}
     @keyframes spin{to{transform:rotate(416deg)}}@keyframes float{50%{transform:translateY(-10px) rotate(2deg)}}@media(max-width:760px){.navlinks{display:none}.hero{grid-template-columns:1fr;padding-top:35px}.orbital{max-width:330px}.grid,.showcase{grid-template-columns:1fr}.cta{display:block}.cta .btn{margin-top:22px}.footer{display:block}.footer span{display:block;margin-top:8px}}
   </style>
 </head>
@@ -24,8 +37,56 @@
     <section class="wrap hero"><div><div class="eyebrow">The next desktop atmosphere</div><h1>Your desktop,<br><span class="gradient">alive.</span></h1><p class="lead">Nexozen turns Windows into a living canvas — cinematic wallpapers, intelligent creation tools, and a calmer, more personal desktop experience.</p><div class="actions"><a class="btn primary" href="#download">Explore Nexozen <span>↗</span></a><a class="btn" href="#vision">See the vision</a></div><div class="meta"><span><b>Windows 10/11</b> native shell</span><span><b>60 FPS</b> GPU rendering</span></div></div><div class="orbital"><div class="orbit"><i></i></div><div class="orbit two"><i></i></div><div class="core"><img src="assets/nexozen-emblem.svg" alt="Nexozen emblem"></div></div></section>
     <section class="wrap" id="vision"><div class="sectionhead"><div class="eyebrow">A new layer of computing</div><h2>More than a wallpaper.</h2><p>Designed like an operating system from the future, Nexozen brings motion, atmosphere, widgets, and AI into one focused, beautiful surface.</p></div><div class="grid"><article class="card"><div class="icon">✦</div><h3>Living worlds</h3><p>Real-time shader scenes and image-backed Ken Burns motion turn your idle desktop into an ambient space.</p></article><article class="card"><div class="icon">◈</div><h3>AI Studio</h3><p>Describe a mood, direct the scene, and generate a complete visual world with free local-first model options.</p></article><article class="card"><div class="icon">⌁</div><h3>Quietly powerful</h3><p>GPU-aware rendering, reduced-motion controls, and a tray-first shell keep the experience smooth and respectful.</p></article></div></section>
     <section class="wrap" id="features"><div class="sectionhead"><div class="eyebrow">Built for the everyday</div><h2>A desktop that responds.</h2></div><div class="showcase"><div class="shot"><div class="label">Cinematic motion layers</div></div><div class="shot"><div class="label">A focused creation studio</div></div></div></section>
-    <section class="wrap" id="download"><div class="cta"><div><h2>Enter the Nexozen private preview.</h2><p>The Windows installer and product updates are being prepared for the first public release.</p></div><a class="btn primary" href="https://github.com/sargeraas84/nexozen" target="_blank" rel="noreferrer">Follow the build ↗</a></div></section>
+    <section class="wrap" id="download">
+      <div class="sectionhead"><div class="eyebrow">Downloads</div><h2 id="dl-title">Get Nexozen.</h2><p id="dl-sub">Fetching the latest release…</p></div>
+      <div class="dl-grid" id="dl-grid">
+        <article class="dl-card" data-os="windows"><div class="dl-os">🪟 Windows 10/11</div><div class="dl-links" id="dl-windows"><span class="dl-pending">Release data loading…</span></div></article>
+        <article class="dl-card" data-os="macos"><div class="dl-os">🍎 macOS</div><div class="dl-links" id="dl-macos"><span class="dl-pending">Release data loading…</span></div></article>
+      </div>
+      <div class="dl-foot" id="dl-foot">Signed only by your trust — Nexus builds are unsigned for now, so Windows may warn and macOS needs right-click → Open.</div>
+    </section>
   </main>
   <footer class="wrap footer"><span>© 2026 Nexozen Labs</span><span>Your desktop, alive.</span></footer>
+  <script>
+    // Downloads come from downloads.json, which the release workflow refreshes
+    // whenever a new version is tagged — no hard-coded installer links.
+    (async () => {
+      const fmt = (bytes) => (bytes ? (bytes / 1048576).toFixed(0) + ' MB' : '');
+      const labelFor = (a) => (a.platform === 'macos'
+        ? (a.arch === 'arm64' ? 'Apple Silicon' : 'Intel')
+        : (a.arch === 'arm64' ? 'Windows on ARM' : a.arch === 'x64' ? 'Windows 64-bit' : 'Windows (combined)'));
+      const render = (host, list) => {
+        host.replaceChildren();
+        if (!list.length) { host.innerHTML = '<span class="dl-pending">No installer published yet for this platform.</span>'; return; }
+        for (const a of list) {
+          const el = document.createElement('a');
+          el.className = 'dl-item';
+          el.href = a.url;
+          el.innerHTML = `<span><b>${labelFor(a)}</b><br><span>${a.note || 'Installer'}</span></span><span class="dl-size">${fmt(a.size)}</span>`;
+          host.appendChild(el);
+        }
+      };
+      try {
+        const res = await fetch('./downloads.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error('manifest unavailable');
+        const data = await res.json();
+        const assets = data.assets || [];
+        document.getElementById('dl-title').textContent = 'Get Nexozen ' + (data.version || '');
+        document.getElementById('dl-sub').innerHTML = `<span class="dl-version">Latest release</span><br>` +
+          (data.publishedAt ? 'Published ' + new Date(data.publishedAt).toLocaleDateString() + ' · ' : '') +
+          `${assets.length} installers for Windows and macOS.`;
+        render(document.getElementById('dl-windows'), assets.filter((a) => a.platform === 'windows'));
+        render(document.getElementById('dl-macos'), assets.filter((a) => a.platform === 'macos'));
+        if (data.releaseUrl) {
+          const foot = document.getElementById('dl-foot');
+          foot.innerHTML = 'Unsigned builds: Windows may show a SmartScreen warning and macOS needs right-click → <b>Open</b> on first launch. ' +
+            `<a class="dl-all" href="${data.releaseUrl}" target="_blank" rel="noopener">Full release notes ↗</a>`;
+        }
+      } catch {
+        document.getElementById('dl-sub').textContent = 'Latest release data is unavailable right now — check the repository for current installers.';
+        for (const id of ['dl-windows', 'dl-macos']) document.getElementById(id).innerHTML = '<span class="dl-pending">Manifest not published yet.</span>';
+      }
+    })();
+  </script>
 </body>
 </html>
