@@ -28,6 +28,19 @@
     .dl-version{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(39,227,255,.35);color:var(--cyan);border-radius:999px;padding:5px 12px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
     .dl-foot{margin-top:16px;color:var(--muted);font-size:12px}
     .dl-all{display:inline-block;margin-top:12px;color:var(--text);font-size:12px;border-bottom:1px solid var(--line)}
+    .dl-access{margin-top:20px;border:1px solid rgba(39,227,255,.3);border-radius:20px;padding:26px;background:linear-gradient(120deg,rgba(39,227,255,.09),rgba(157,102,255,.08));display:grid;gap:22px;grid-template-columns:1.05fr .95fr;align-items:start}
+    .dl-access[hidden]{display:none}
+    .dl-lock{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:5px 12px;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+    .dl-access h3{margin:14px 0 8px;font-size:23px;letter-spacing:-.03em;line-height:1.2}
+    .dl-access p{margin:0;color:var(--muted);font-size:14px}
+    .dl-access ol{margin:0 0 18px;padding-left:20px;color:var(--muted);font-size:13px}
+    .dl-access ol li{margin-bottom:8px}
+    .dl-access li b{color:var(--text)}
+    .dl-access-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .dl-access-actions .btn{cursor:pointer;font:inherit}
+    .dl-item.locked{width:100%;cursor:pointer;font:inherit;color:inherit;text-align:left}
+    .dl-item.locked:hover{border-color:rgba(157,102,255,.55)}
+    .dl-locked-note{color:var(--violet);font-weight:700}
     @keyframes spin{to{transform:rotate(416deg)}}@keyframes float{50%{transform:translateY(-10px) rotate(2deg)}}@media(max-width:760px){.navlinks{display:none}.hero{grid-template-columns:1fr;padding-top:35px}.orbital{max-width:330px}.grid,.showcase{grid-template-columns:1fr}.cta{display:block}.cta .btn{margin-top:22px}.footer{display:block}.footer span{display:block;margin-top:8px}}
   </style>
 </head>
@@ -43,7 +56,26 @@
         <article class="dl-card" data-os="windows"><div class="dl-os">🪟 Windows 10/11</div><div class="dl-links" id="dl-windows"><span class="dl-pending">Release data loading…</span></div></article>
         <article class="dl-card" data-os="macos"><div class="dl-os">🍎 macOS</div><div class="dl-links" id="dl-macos"><span class="dl-pending">Release data loading…</span></div></article>
       </div>
-      <div class="dl-foot" id="dl-foot">Signed only by your trust — Nexus builds are unsigned for now, so Windows may warn and macOS needs right-click → Open.</div>
+      <div class="dl-access" id="dl-access" hidden>
+        <div>
+          <span class="dl-lock">🔒 Private preview</span>
+          <h3>Nexozen is in closed preview — access is granted per tester.</h3>
+          <p>Builds are complete and run on real machines, but the desktop layer is still being finished, so the installers live in a private repository. That means these download links only resolve for accounts that have been given access.</p>
+        </div>
+        <div>
+          <ol>
+            <li><b>Request access</b> with the platform you can actually test on — that is what decides approval.</li>
+            <li><b>You get an invite</b> to the private repository, where the installers, release notes, and a verification checklist live.</li>
+            <li><b>Expect rough edges</b> — builds are unsigned, so Windows shows a SmartScreen warning and macOS needs right-click → <b>Open</b>.</li>
+          </ol>
+          <div class="dl-access-actions">
+            <a class="btn primary" id="dl-request" href="https://github.com/sargeraas84/nexozen-site/issues/new" target="_blank" rel="noopener">Request access ↗</a>
+            <button class="btn" id="dl-copy" type="button">Copy request template</button>
+          </div>
+          <p class="dl-pending" id="dl-copy-note" style="margin-top:12px"></p>
+        </div>
+      </div>
+      <div class="dl-foot" id="dl-foot">Signed only by your trust — Nexozen builds are unsigned for now, so Windows may warn and macOS needs right-click → Open.</div>
     </section>
   </main>
   <footer class="wrap footer"><span>© 2026 Nexozen Labs</span><span>Your desktop, alive.</span></footer>
@@ -55,14 +87,50 @@
       const labelFor = (a) => (a.platform === 'macos'
         ? (a.arch === 'arm64' ? 'Apple Silicon' : 'Intel')
         : (a.arch === 'arm64' ? 'Windows on ARM' : a.arch === 'x64' ? 'Windows 64-bit' : 'Windows (combined)'));
+      // While the app repository is private its release assets 404 for everyone
+      // else, so a download link would be a lie. Ask for access instead.
+      const SITE_REPO = 'https://github.com/sargeraas84/nexozen-site';
+      let privatePreview = false;
+      const platformName = (a) => (a ? (a.platform === 'macos' ? 'macOS' : 'Windows 10/11') + (a.arch && a.arch !== 'any' ? ` (${a.arch})` : '') : 'Windows 10/11');
+      const requestUrl = (a) => `${SITE_REPO}/issues/new?title=` + encodeURIComponent(`Access request — Nexozen on ${platformName(a)}`) +
+        '&body=' + encodeURIComponent([
+          `**Platform:** ${platformName(a)}`,
+          '',
+          '**What I want to test:** ',
+          '',
+          'I understand Nexozen is an early preview and its builds are unsigned.',
+        ].join('\n'));
+      const requestTemplate = (a) => [
+        `Hi — I would like access to the Nexozen private preview.`,
+        `Platform: ${platformName(a)}`,
+        `What I want to test: `,
+        `I understand the builds are unsigned (SmartScreen warning on Windows, right-click → Open on macOS).`,
+      ].join('\n');
       const render = (host, list) => {
         host.replaceChildren();
         if (!list.length) { host.innerHTML = '<span class="dl-pending">No installer published yet for this platform.</span>'; return; }
         for (const a of list) {
+          const label = labelFor(a);
+          if (privatePreview) {
+            const el = document.createElement('button');
+            el.type = 'button';
+            el.className = 'dl-item locked';
+            el.setAttribute('aria-label', `Request access for ${label}`);
+            el.innerHTML = `<span><b>🔒 ${label}</b><br><span class="dl-locked-note">${fmt(a.size)} · access required</span></span><span class="dl-size">Request ↗</span>`;
+            el.addEventListener('click', () => {
+              const panel = document.getElementById('dl-access');
+              document.getElementById('dl-request').href = requestUrl(a);
+              document.getElementById('dl-copy').dataset.template = requestTemplate(a);
+              panel.hidden = false;
+              panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+            host.appendChild(el);
+            continue;
+          }
           const el = document.createElement('a');
           el.className = 'dl-item';
           el.href = a.url;
-          el.innerHTML = `<span><b>${labelFor(a)}</b><br><span>${a.note || 'Installer'}</span></span><span class="dl-size">${fmt(a.size)}</span>`;
+          el.innerHTML = `<span><b>${label}</b><br><span>${a.note || 'Installer'}</span></span><span class="dl-size">${fmt(a.size)}</span>`;
           host.appendChild(el);
         }
       };
@@ -71,16 +139,37 @@
         if (!res.ok) throw new Error('manifest unavailable');
         const data = await res.json();
         const assets = data.assets || [];
+        privatePreview = data.access === 'private';
+        const panel = document.getElementById('dl-access');
+        panel.hidden = !privatePreview;
+        document.getElementById('dl-request').href = requestUrl(null);
+        document.getElementById('dl-copy').dataset.template = requestTemplate(null);
         document.getElementById('dl-title').textContent = 'Get Nexozen ' + (data.version || '');
-        document.getElementById('dl-sub').innerHTML = `<span class="dl-version">Latest release</span><br>` +
+        document.getElementById('dl-sub').innerHTML = `<span class="dl-version">${privatePreview ? 'Private preview' : 'Latest release'}</span><br>` +
           (data.publishedAt ? 'Published ' + new Date(data.publishedAt).toLocaleDateString() + ' · ' : '') +
-          `${assets.length} installers for Windows and macOS.`;
+          (privatePreview
+            ? `${assets.length} installers built for Windows and macOS, available to approved testers.`
+            : `${assets.length} installers for Windows and macOS.`);
         render(document.getElementById('dl-windows'), assets.filter((a) => a.platform === 'windows'));
         render(document.getElementById('dl-macos'), assets.filter((a) => a.platform === 'macos'));
-        if (data.releaseUrl) {
+        const copyBtn = document.getElementById('dl-copy');
+        copyBtn.addEventListener('click', async () => {
+          const note = document.getElementById('dl-copy-note');
+          try {
+            await navigator.clipboard.writeText(copyBtn.dataset.template || '');
+            note.textContent = 'Template copied — paste it anywhere you can reach us.';
+          } catch {
+            note.textContent = 'Copy blocked by the browser — use Request access instead.';
+          }
+        });
+        if (data.releaseUrl && !privatePreview) {
           const foot = document.getElementById('dl-foot');
           foot.innerHTML = 'Unsigned builds: Windows may show a SmartScreen warning and macOS needs right-click → <b>Open</b> on first launch. ' +
             `<a class="dl-all" href="${data.releaseUrl}" target="_blank" rel="noopener">Full release notes ↗</a>`;
+        } else if (privatePreview) {
+          document.getElementById('dl-foot').innerHTML =
+            'Unsigned builds in a private repository: Windows may show a SmartScreen warning and macOS needs right-click → <b>Open</b> on first launch. ' +
+            `<a class="dl-all" href="${SITE_REPO}/issues" target="_blank" rel="noopener">Ask a question ↗</a>`;
         }
       } catch {
         document.getElementById('dl-sub').textContent = 'Latest release data is unavailable right now — check the repository for current installers.';
