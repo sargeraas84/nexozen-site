@@ -1,43 +1,50 @@
 {
   "version": "0.9.0",
   "tag": "v0.9.0",
-  "publishedAt": "2026-09-11T12:07:11Z",
+  "access": "private",
+  "generatedAt": "2026-09-11T13:06:02.644Z",
+  "publishedAt": "2026-09-11T13:06:02.645Z",
   "releaseUrl": "https://github.com/sargeraas84/nexozen/releases/tag/v0.9.0",
   "assets": [
     {
-      "platform": "macos",
-      "arch": "arm64",
-      "file": "Nexozen-0.9.0-mac-arm64.zip",
-      "size": 109197214,
-      "note": "Unzip, then drag Nexozen into Applications"
-    },
-    {
-      "platform": "macos",
-      "arch": "x64",
-      "file": "Nexozen-0.9.0-mac-x64.zip",
-      "size": 113983316,
-      "note": "Unzip, then drag Nexozen into Applications"
-    },
-    {
-      "platform": "windows",
-      "arch": "arm64",
-      "file": "Nexozen-Setup-0.9.0-arm64.exe",
-      "size": 86249363,
-      "note": "Per-user installer"
-    },
-    {
       "platform": "windows",
       "arch": "x64",
+      "note": "Per-user installer",
       "file": "Nexozen-Setup-0.9.0-x64.exe",
-      "size": 91898506,
-      "note": "Per-user installer"
+      "size": 92647638,
+      "url": "https://github.com/sargeraas84/nexozen/releases/download/v0.9.0/Nexozen-Setup-0.9.0-x64.exe"
+    },
+    {
+      "platform": "windows",
+      "arch": "arm64",
+      "note": "Per-user installer",
+      "file": "Nexozen-Setup-0.9.0-arm64.exe",
+      "size": 87103230,
+      "url": "https://github.com/sargeraas84/nexozen/releases/download/v0.9.0/Nexozen-Setup-0.9.0-arm64.exe"
     },
     {
       "platform": "windows",
       "arch": "any",
+      "note": "Per-user installer",
       "file": "Nexozen-Setup-0.9.0.exe",
-      "size": 177560783,
-      "note": "Per-user installer"
+      "size": 179163808,
+      "url": "https://github.com/sargeraas84/nexozen/releases/download/v0.9.0/Nexozen-Setup-0.9.0.exe"
+    },
+    {
+      "platform": "macos",
+      "arch": "x64",
+      "note": "Unzip, then drag Nexozen into Applications",
+      "file": "Nexozen-0.9.0-mac-x64.zip",
+      "size": 113970225,
+      "url": "https://github.com/sargeraas84/nexozen/releases/download/v0.9.0/Nexozen-0.9.0-mac-x64.zip"
+    },
+    {
+      "platform": "macos",
+      "arch": "arm64",
+      "note": "Unzip, then drag Nexozen into Applications",
+      "file": "Nexozen-0.9.0-mac-arm64.zip",
+      "size": 109184123,
+      "url": "https://github.com/sargeraas84/nexozen/releases/download/v0.9.0/Nexozen-0.9.0-mac-arm64.zip"
     }
   ]
 }
